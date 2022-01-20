@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.processing.annotations.Stateful;
 import me.inao.dbbp.processing.annotations.Stateless;
-import me.inao.dbbp.processing.lentil.StatefulLentilContainer;
 import me.inao.dbbp.processing.persistant.StorageUnit;
 
 import java.lang.reflect.Field;
@@ -58,9 +57,9 @@ public class InjectorHandler {
                             List<String> lentilContainers = storageUnit.getStatefulLentilsContainerMap().keySet().stream()
                                     .filter(lentilName -> lentilName.startsWith(field.getType().getSimpleName()))
                                     .collect(Collectors.toList());
-                            if (lentilContainers.size() == 1) {
+                            if (lentilContainers.size() > 1) {
                                 val = storageUnit.getStatefulLentilsContainerMap().get(lentilContainers.get(0)).getLentil();
-                            } else if(lentilContainers.size() > 1 && injectData.sequenceNumber() > 1 && injectData.sequenceNumber() <= lentilContainers.size()){
+                            } else if(injectData.sequenceNumber() >= 0 && injectData.sequenceNumber() <= lentilContainers.size()){
                                 val = storageUnit.getStatefulLentilsContainerMap().get(lentilContainers.get(injectData.sequenceNumber())).getLentil();
                             }
                             else {
