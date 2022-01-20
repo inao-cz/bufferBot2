@@ -1,0 +1,12 @@
+{
+  "apikey": "",
+  "prefix": "dbbp~",
+  "status": "dnd",
+  "commands": {
+    "Test": {
+      "enabled": true,
+      "perms": 8,
+      "description": "Command description."
+    }
+  }
+}
