@@ -32,7 +32,7 @@ public class CommandsProcessor {
                 .findAny();
 
         if(command.isPresent()) {
-            if(command.get().getClass().isAnnotationPresent(Permission.class)){
+            if(command.get().isAnnotationPresent(Permission.class)){
                 if (!storageUnit.getPermissionCheck().checkPermission(msg, command.get())) return false;
             }
             new Thread(new CommandWrapper(command.get(), event, storageUnit)).start();

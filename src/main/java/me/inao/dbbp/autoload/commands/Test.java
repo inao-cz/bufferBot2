@@ -6,8 +6,10 @@ import me.inao.dbbp.processing.annotations.Autoload;
 import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.enums.AutoloadType;
 import me.inao.dbbp.interfaces.ICommand;
+import me.inao.dbbp.processing.annotations.Permission;
 import org.javacord.api.entity.message.Message;
 
+@Permission(PermissionMask = 8)
 @Autoload(type = AutoloadType.COMMAND)
 public class Test implements ICommand {
 
