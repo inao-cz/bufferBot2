@@ -22,9 +22,9 @@ public class Main {
         new Config().loadConfig(this);
         DiscordApiBuilder builder = new DiscordApiBuilder().setWaitForServersOnStartup(false).setToken(storageUnit.getConfig().getApikey());
 
+        new LentilHandler(storageUnit).loadStatefulLentils("me.inao.dbbp.lentils");
         new AutoloadHandler(storageUnit).loadCommands("me.inao.dbbp.autoload");
         new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.dbbp.autoload");
-        new LentilHandler(storageUnit).loadStatefulLentils("me.inao.dbbp.lentils");
 
         DiscordApi api = builder.login().join();
         api.updateStatus(UserStatus.fromString(storageUnit.getConfig().getStatus().length() > 1 ? storageUnit.getConfig().getStatus() : "online" ));

@@ -19,7 +19,6 @@ public class MessageCreateListener implements org.javacord.api.listener.message.
             return;
         }
         if (!event.getMessageContent().isEmpty() && event.getMessage().getContent().startsWith(String.valueOf(storageUnit.getConfig().getPrefix()))) {
-//            executor.execute(e.getMessage(), instance);
             if(!new CommandsProcessor().startCommandIfAny(event.getMessage(), event, storageUnit)){
                 event.getMessage().getChannel().sendMessage("Unknown command!");
             }
