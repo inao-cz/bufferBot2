@@ -26,7 +26,7 @@ public class LentilHandler {
             try{
                 StatefulLentilContainer container = new StatefulLentilContainer();
                 container.setLentil(cls.getDeclaredConstructor().newInstance());
-                unit.getStatefulLentilsContainerMap().put(cls.getSimpleName() + x, container);
+                unit.getStatefulLentilsSoup().put(cls.getSimpleName() + x, container);
                 addedLentils.add(cls.getSimpleName() + x);
             }catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e){
                 e.printStackTrace();

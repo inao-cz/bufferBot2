@@ -19,17 +19,19 @@ class CommandAutoloader{
     @Getter
     private final HashMap<String, Class<? extends ICommand>> map = new HashMap<>();
 
-    public void start() {
-        Reflections reflections = new Reflections(prefix);
-        Set<Class<? extends ICommand>> classes = reflections.getSubTypesOf(ICommand.class);
-        classes.forEach(commandClass -> {
-            if(commandClass.isAnnotationPresent(Autoload.class)){
-                AutoloadType type = commandClass.getAnnotation(Autoload.class).type();
-                if(type == AutoloadType.COMMAND && unit.getConfig().isCommandEnabled(commandClass.getSimpleName())){
-                    map.put(commandClass.getSimpleName(), commandClass);
+    public Runnable load() {
+        return () -> {
+            Reflections reflections = new Reflections(prefix);
+            Set<Class<? extends ICommand>> classes = reflections.getSubTypesOf(ICommand.class);
+            classes.forEach(commandClass -> {
+                if(commandClass.isAnnotationPresent(Autoload.class)){
+                    AutoloadType type = commandClass.getAnnotation(Autoload.class).type();
+                    if(type == AutoloadType.COMMAND && unit.getConfig().isCommandEnabled(commandClass.getSimpleName())){
+                        map.put(commandClass.getSimpleName(), commandClass);
+                    }
                 }
-            }
-        });
-        unit.setCommandOverviewMap(map);
+            });
+            unit.setCommandOverviewMap(map);
+        };
     }
 }

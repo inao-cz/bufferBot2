@@ -4,6 +4,8 @@ import lombok.Getter;
 import me.inao.dbbp.processing.lentil.LentilHandler;
 import me.inao.dbbp.processing.loader.AutoloadHandler;
 import me.inao.dbbp.processing.persistant.StorageUnit;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.Logger;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.intent.Intent;
@@ -27,6 +29,10 @@ public class Main {
         new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.dbbp.autoload");
 
         DiscordApi api = builder.login().join();
+
+        storageUnit.setApi(api);
+        new AutoloadHandler(storageUnit).fixJavacordMessInListeners(api);
+
         api.updateStatus(UserStatus.fromString(storageUnit.getConfig().getStatus().length() > 1 ? storageUnit.getConfig().getStatus() : "online" ));
     }
 }

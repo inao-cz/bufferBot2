@@ -6,6 +6,7 @@ import me.inao.dbbp.Config;
 import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.processing.lentil.StatefulLentilContainer;
 import me.inao.dbbp.processing.perms.PermissionCheck;
+import org.javacord.api.DiscordApi;
 
 import java.util.HashMap;
 
@@ -15,5 +16,6 @@ public class StorageUnit {
     private Config config;
     private HashMap<String, Class<? extends ICommand>> commandOverviewMap;
     private PermissionCheck permissionCheck = new PermissionCheck(this);
-    private HashMap<String, StatefulLentilContainer> statefulLentilsContainerMap = new HashMap<>();
+    private DiscordApi api;
+    private HashMap<String, StatefulLentilContainer> statefulLentilsSoup = new HashMap<>();
 }

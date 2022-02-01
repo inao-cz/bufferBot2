@@ -8,5 +8,12 @@
       "perms": 8,
       "description": "Command description."
     }
+  },
+  "features": {
+    "Logger": {
+      "enabled": true,
+      "room": "log",
+      "category": "admin"
+    }
   }
 }

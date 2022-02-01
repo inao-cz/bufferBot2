@@ -5,6 +5,9 @@ import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.processing.annotations.Stateful;
 import me.inao.dbbp.processing.annotations.Stateless;
 import me.inao.dbbp.processing.persistant.StorageUnit;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +21,8 @@ public class InjectorHandler {
 
     private final StorageUnit storageUnit;
 
+    Logger logger = LogManager.getLogger(InjectorHandler.class);
+
     public void injectionHandler(Object target, Object giver) {
         Arrays.stream(target.getClass().getDeclaredFields()).forEach(field -> {
             if (field.isAnnotationPresent(Inject.class)) {
@@ -30,44 +35,57 @@ public class InjectorHandler {
                         val = giverField.get(giver);
                         giverField.setAccessible(false);
                     } catch (NoSuchFieldException noSuchFieldException) {
-                        System.out.println("Field " + injectData.field() + " in " + field.getType() + " not found..");
-                        noSuchFieldException.printStackTrace();
+                        logError("Field " + injectData.field() + " in " + field.getType() + " not found..", noSuchFieldException);
                     } catch (IllegalAccessException illegalAccessException) {
-                        System.out.println("Illegal access to " + injectData.field() + " in " + field.getType());
-                        illegalAccessException.printStackTrace();
+                        logError("Illegal access to " + injectData.field() + " in " + field.getType(), illegalAccessException);
                     }
                 } else if (injectData.function().length() > 0) {
                     try {
                         Method method = giver.getClass().getMethod(injectData.function().replace("()", ""));
                         val = method.invoke(giver);
                     } catch (NoSuchMethodException noSuchMethodException) {
-                        System.out.println("No such method as " + injectData.function() + "found in " + giver.getClass().getName());
-                        noSuchMethodException.printStackTrace();
+                        logError("No such method as " + injectData.function() + "found in " + giver.getClass().getName(), noSuchMethodException);
                     } catch (InvocationTargetException e) {
-                        e.printStackTrace();
+                        logError("Cannot invoke.", e);
                     } catch (IllegalAccessException illegalAccessException) {
-                        System.out.println("Illegal access to " + injectData.function() + " in " + giver.getClass().getName());
+                        logError("Illegal access to " + injectData.function() + " in " + giver.getClass().getName(), illegalAccessException);
+                    }
+                } else if (injectData.outside()) {
+                    List<Field> fieldList = Arrays.stream(storageUnit.getClass().getDeclaredFields())
+                            .filter(fl -> fl.getType().equals(field.getType()))
+                            .collect(Collectors.toList());
+                    try {
+                        if (fieldList.size() == 1) {
+                            fieldList.get(0).setAccessible(true);
+                            val = fieldList.get(0).get(storageUnit);
+                            fieldList.get(0).setAccessible(false);
+                        } else if (fieldList.size() > 1 && injectData.sequenceNumber() != 0 && injectData.sequenceNumber() <= fieldList.size()) {
+                            val = fieldList.get(injectData.sequenceNumber());
+                        } else {
+                            logger.log(Level.ERROR, "There was a problem with injecting your object outside of lentils system. Please, check if your field exists.");
+                        }
+                    } catch (IllegalAccessException illegalAccessException) {
                         illegalAccessException.printStackTrace();
                     }
                 } else {
                     try {
                         if (field.getType().isAnnotationPresent(Stateless.class)) {
                             val = field.getType().getDeclaredConstructor().newInstance();
+                            new InjectorHandler(storageUnit).injectionHandler(val, null);
                         } else if (field.getType().isAnnotationPresent(Stateful.class)) {
-                            List<String> lentilContainers = storageUnit.getStatefulLentilsContainerMap().keySet().stream()
+                            List<String> lentilContainers = storageUnit.getStatefulLentilsSoup().keySet().stream()
                                     .filter(lentilName -> lentilName.startsWith(field.getType().getSimpleName()))
                                     .collect(Collectors.toList());
                             if (lentilContainers.size() > 1) {
-                                val = storageUnit.getStatefulLentilsContainerMap().get(lentilContainers.get(0)).getLentil();
-                            } else if(injectData.sequenceNumber() >= 0 && injectData.sequenceNumber() <= lentilContainers.size()){
-                                val = storageUnit.getStatefulLentilsContainerMap().get(lentilContainers.get(injectData.sequenceNumber())).getLentil();
-                            }
-                            else {
-                                System.out.println("There was a problem with injecting your stateful lentil. Most probably you've entered incorrect sequence number or your lentil doesn't exist");
+                                val = storageUnit.getStatefulLentilsSoup().get(lentilContainers.get(0)).getLentil();
+                            } else if (injectData.sequenceNumber() >= 0 && injectData.sequenceNumber() <= lentilContainers.size()) {
+                                val = storageUnit.getStatefulLentilsSoup().get(lentilContainers.get(injectData.sequenceNumber())).getLentil();
+                            } else {
+                                logger.log(Level.ERROR, "There was a problem with injecting your stateful lentil. Most probably you've entered incorrect sequence number or your lentil doesn't exist");
                             }
                         }
                     } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException noSuchMethodException) {
-                        noSuchMethodException.printStackTrace();
+                        logger.log(Level.ERROR, noSuchMethodException);
                     }
                 }
                 if (val != null) {
@@ -81,5 +99,10 @@ public class InjectorHandler {
                 }
             }
         });
+    }
+
+    private void logError(String message, Throwable exception) {
+        logger.log(Level.ERROR, exception);
+        logger.log(Level.ERROR, message);
     }
 }

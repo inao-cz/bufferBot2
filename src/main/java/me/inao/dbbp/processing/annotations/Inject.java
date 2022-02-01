@@ -11,4 +11,5 @@ public @interface Inject {
     String field() default "";
     String function() default "";
     int sequenceNumber() default 0;
+    boolean outside() default false;
 }

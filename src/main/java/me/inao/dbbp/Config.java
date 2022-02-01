@@ -21,6 +21,10 @@ public class Config {
     @Expose
     private JsonObject commands;
 
+    @SerializedName("features")
+    @Expose
+    JsonObject features;
+
     public void loadConfig(Main instance){
         Gson gson = new Gson();
         String[] files = {"config.local.json", "config.json"};
@@ -57,5 +61,15 @@ public class Config {
             return commands.getAsJsonObject(name).get("perms").getAsInt();
         }catch (Exception ignored){}
         return -1;
+    }
+
+    public String getFeatureChannel(String name){
+        try{
+            return features.getAsJsonObject(name).get("room").getAsString();
+        }catch (Exception e) {
+            System.out.println(name);
+            System.out.println("No room set :(");
+        }
+        return null;
     }
 }
