@@ -1,9 +1,9 @@
-package me.inao.dbbp.autoload.listeners;
+package me.inao.discordbot.autoload.listeners;
 
 import lombok.RequiredArgsConstructor;
-import me.inao.dbbp.lentils.LoggerLentil;
+import me.inao.discordbot.lentils.LoggerLentil;
 import me.inao.dbbp.processing.annotations.Autoload;
-import me.inao.dbbp.enums.AutoloadType;
+import me.inao.discordbot.enums.AutoloadType;
 import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.processing.commands.CommandsProcessor;
 import me.inao.dbbp.processing.persistant.StorageUnit;
@@ -32,7 +32,7 @@ public class MessageCreateListener implements org.javacord.api.listener.message.
             if(!new CommandsProcessor().startCommandIfAny(event.getMessage(), event, storageUnit)){
                 event.getMessage().getChannel().sendMessage("Unknown command!");
             }
-            logger.log(this.getClass(), "Exec try", "User has tried to execute command " + event.getMessage(), true, Level.INFO);
+            logger.log(this.getClass(), "Exec try", "User has tried to execute command. " + event.getMessage(), true, Level.INFO);
         }
     }
 }

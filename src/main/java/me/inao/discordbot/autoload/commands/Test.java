@@ -1,13 +1,12 @@
-package me.inao.dbbp.autoload.commands;
+package me.inao.discordbot.autoload.commands;
 
-import me.inao.dbbp.lentils.LoggerLentil;
-import me.inao.dbbp.lentils.MessageSenderUtil;
+import me.inao.discordbot.lentils.MessageSenderUtil;
 import me.inao.dbbp.processing.annotations.Autoload;
 import me.inao.dbbp.processing.annotations.Inject;
-import me.inao.dbbp.enums.AutoloadType;
-import me.inao.dbbp.interfaces.ICommand;
+import me.inao.discordbot.enums.AutoloadType;
+import me.inao.discordbot.interfaces.ICommand;
 import me.inao.dbbp.processing.annotations.Permission;
-import me.inao.dbbp.statics.Colors;
+import me.inao.discordbot.statics.Colors;
 import org.javacord.api.entity.message.Message;
 
 import java.awt.*;

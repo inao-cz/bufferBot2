@@ -63,6 +63,15 @@ public class Config {
         return -1;
     }
 
+    public boolean isFeatureEnabled(String name){
+        try{
+            return features.getAsJsonObject(name).get("enabled").getAsBoolean();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public String getFeatureChannel(String name){
         try{
             return features.getAsJsonObject(name).get("room").getAsString();

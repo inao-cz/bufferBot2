@@ -1,6 +1,6 @@
 package me.inao.dbbp.processing.annotations;
 
-import me.inao.dbbp.enums.AutoloadType;
+import me.inao.discordbot.enums.AutoloadType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

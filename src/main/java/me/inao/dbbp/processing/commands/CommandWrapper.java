@@ -1,7 +1,7 @@
 package me.inao.dbbp.processing.commands;
 
 import lombok.RequiredArgsConstructor;
-import me.inao.dbbp.interfaces.ICommand;
+import me.inao.discordbot.interfaces.ICommand;
 import me.inao.dbbp.processing.injectors.InjectorHandler;
 import me.inao.dbbp.processing.persistant.StorageUnit;
 

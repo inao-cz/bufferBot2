@@ -1,7 +1,7 @@
 package me.inao.dbbp.processing.commands;
 
 import me.inao.dbbp.processing.annotations.Permission;
-import me.inao.dbbp.interfaces.ICommand;
+import me.inao.discordbot.interfaces.ICommand;
 import me.inao.dbbp.processing.persistant.StorageUnit;
 import org.javacord.api.entity.message.Message;
 

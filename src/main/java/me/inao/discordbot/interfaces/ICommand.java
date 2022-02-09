@@ -1,4 +1,4 @@
-package me.inao.dbbp.interfaces;
+package me.inao.discordbot.interfaces;
 
 public interface ICommand {
     void process();

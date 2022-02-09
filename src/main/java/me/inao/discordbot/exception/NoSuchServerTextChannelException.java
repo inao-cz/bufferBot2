@@ -1,4 +1,4 @@
-package me.inao.dbbp.exception;
+package me.inao.discordbot.exception;
 
 public class NoSuchServerTextChannelException extends RuntimeException{
 }

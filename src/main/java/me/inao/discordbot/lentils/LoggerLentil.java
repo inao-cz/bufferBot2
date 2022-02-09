@@ -1,7 +1,7 @@
-package me.inao.dbbp.lentils;
+package me.inao.discordbot.lentils;
 
 import me.inao.dbbp.Config;
-import me.inao.dbbp.exception.NoSuchServerTextChannelException;
+import me.inao.discordbot.exception.NoSuchServerTextChannelException;
 import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.processing.annotations.Stateless;
 import org.apache.logging.log4j.Level;

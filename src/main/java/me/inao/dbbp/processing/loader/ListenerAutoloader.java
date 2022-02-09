@@ -1,7 +1,7 @@
 package me.inao.dbbp.processing.loader;
 
 import lombok.RequiredArgsConstructor;
-import me.inao.dbbp.enums.AutoloadType;
+import me.inao.discordbot.enums.AutoloadType;
 import me.inao.dbbp.processing.annotations.Autoload;
 import me.inao.dbbp.processing.injectors.InjectorHandler;
 import me.inao.dbbp.processing.persistant.StorageUnit;
@@ -11,9 +11,7 @@ import org.javacord.api.listener.GloballyAttachableListener;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 class ListenerAutoloader {
