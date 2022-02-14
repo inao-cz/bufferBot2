@@ -1,7 +1,7 @@
 package me.inao.dbbp.processing.loader;
 
 import lombok.RequiredArgsConstructor;
-import me.inao.discordbot.enums.AutoloadType;
+import me.inao.dbbp.processing.enums.AutoloadType;
 import me.inao.dbbp.processing.annotations.Autoload;
 import me.inao.dbbp.processing.injectors.InjectorHandler;
 import me.inao.dbbp.processing.persistant.StorageUnit;

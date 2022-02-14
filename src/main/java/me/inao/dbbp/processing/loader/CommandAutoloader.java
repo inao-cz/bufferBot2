@@ -3,7 +3,7 @@ package me.inao.dbbp.processing.loader;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.inao.dbbp.processing.annotations.Autoload;
-import me.inao.discordbot.enums.AutoloadType;
+import me.inao.dbbp.processing.enums.AutoloadType;
 import me.inao.discordbot.interfaces.ICommand;
 import me.inao.dbbp.processing.persistant.StorageUnit;
 import org.reflections.Reflections;

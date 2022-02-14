@@ -25,8 +25,9 @@ public class Main {
         DiscordApiBuilder builder = new DiscordApiBuilder().setWaitForServersOnStartup(false).setToken(storageUnit.getConfig().getApikey());
 
         new LentilHandler(storageUnit).loadStatefulLentils("me.inao.discordbot.lentils");
-        new AutoloadHandler(storageUnit).loadCommands("me.inao.discordbot.autoload");
-        new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.discordbot.autoload");
+        new AutoloadHandler(storageUnit).loadCommands("me.inao.discordbot.autoload.commands");
+        new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.discordbot.autoload.listeners");
+        new AutoloadHandler(storageUnit).loadTasks("me.inao.discordbot.autoload.tasks");
 
         DiscordApi api = builder.login().join();
 

@@ -3,7 +3,7 @@ package me.inao.discordbot.autoload.listeners;
 import lombok.RequiredArgsConstructor;
 import me.inao.discordbot.lentils.LoggerLentil;
 import me.inao.dbbp.processing.annotations.Autoload;
-import me.inao.discordbot.enums.AutoloadType;
+import me.inao.dbbp.processing.enums.AutoloadType;
 import me.inao.dbbp.processing.annotations.Inject;
 import me.inao.dbbp.processing.commands.CommandsProcessor;
 import me.inao.dbbp.processing.persistant.StorageUnit;
