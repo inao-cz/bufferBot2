@@ -4,7 +4,9 @@ import me.inao.dbbp.processing.annotations.Task;
 import me.inao.dbbp.processing.enums.TaskType;
 import me.inao.dbbp.processing.interfaces.IScheduledTask;
 
-@Task(time = 15, type = TaskType.REPEAT)
+import java.time.temporal.ChronoUnit;
+
+//@Task(time = 15, type = TaskType.REPEAT)
 public class RandomColorRefreshTask implements IScheduledTask {
 
     @Override

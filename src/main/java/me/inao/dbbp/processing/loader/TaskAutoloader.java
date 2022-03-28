@@ -9,6 +9,7 @@ import org.reflections.Reflections;
 
 import java.util.Set;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 public class TaskAutoloader {
@@ -36,7 +37,10 @@ public class TaskAutoloader {
                     };
                     switch (taskData.type()) {
                         case ONCE:
+                            unit.getExecutorService().schedule(task, taskData.time(), TimeUnit.of(taskData.unit()));
+                            break;
                         case REPEAT:
+                            unit.getExecutorService().scheduleAtFixedRate(task, 0, taskData.time(), TimeUnit.of(taskData.unit()));
                             break;
                     }
                 }
