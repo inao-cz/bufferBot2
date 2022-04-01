@@ -2,7 +2,7 @@ package me.inao.discordbot.lentils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import me.inao.dbbp.processing.annotations.Stateless;
+import me.inao.dbbp.annotations.Stateless;
 
 import java.io.BufferedReader;
 import java.io.IOException;

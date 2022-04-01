@@ -1,8 +1,8 @@
 package me.inao.discordbot.lentils;
 
-import me.inao.dbbp.processing.annotations.Inject;
-import me.inao.dbbp.processing.annotations.Stateless;
-import me.inao.dbbp.processing.persistant.StorageUnit;
+import me.inao.dbbp.annotations.Inject;
+import me.inao.dbbp.annotations.Stateless;
+import me.inao.dbbp.persistant.StorageUnit;
 import org.apache.logging.log4j.Level;
 
 import java.io.File;

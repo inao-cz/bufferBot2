@@ -1,14 +1,11 @@
 package me.inao.dbbp;
 
 import lombok.Getter;
-import me.inao.dbbp.processing.lentil.LentilHandler;
-import me.inao.dbbp.processing.loader.AutoloadHandler;
-import me.inao.dbbp.processing.persistant.StorageUnit;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.Logger;
+import me.inao.dbbp.lentil.LentilHandler;
+import me.inao.dbbp.loader.AutoloadHandler;
+import me.inao.dbbp.persistant.StorageUnit;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
-import org.javacord.api.entity.intent.Intent;
 import org.javacord.api.entity.user.UserStatus;
 
 @Getter
@@ -30,6 +27,8 @@ public class Main {
         new AutoloadHandler(storageUnit).loadTasks("me.inao.discordbot.autoload.tasks");
 
         DiscordApi api = builder.login().join();
+
+        api.setAutomaticMessageCacheCleanupEnabled(true);
 
         storageUnit.setApi(api);
         new AutoloadHandler(storageUnit).fixJavacordMessInListeners(api);
