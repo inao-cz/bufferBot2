@@ -3,7 +3,7 @@ package me.inao.dbbp.persistant;
 import lombok.Getter;
 import lombok.Setter;
 import me.inao.dbbp.Config;
-import me.inao.discordbot.interfaces.ICommand;
+import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.lentil.StatefulLentilContainer;
 import me.inao.dbbp.perms.PermissionCheck;
 import org.javacord.api.DiscordApi;

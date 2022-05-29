@@ -2,7 +2,7 @@ package me.inao.dbbp.perms;
 
 import lombok.RequiredArgsConstructor;
 import me.inao.dbbp.annotations.Permission;
-import me.inao.discordbot.interfaces.ICommand;
+import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.persistant.StorageUnit;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.permission.Permissions;

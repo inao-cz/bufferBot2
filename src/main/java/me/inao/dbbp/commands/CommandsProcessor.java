@@ -1,7 +1,7 @@
 package me.inao.dbbp.commands;
 
 import me.inao.dbbp.annotations.Permission;
-import me.inao.discordbot.interfaces.ICommand;
+import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.persistant.StorageUnit;
 import org.javacord.api.entity.message.Message;
 
@@ -36,6 +36,7 @@ public class CommandsProcessor {
                 if (!storageUnit.getPermissionCheck().checkPermission(msg, command.get())) return false;
             }
             new Thread(new CommandWrapper(command.get(), event, storageUnit)).start();
+            System.gc();
             return true;
         }
         return false;

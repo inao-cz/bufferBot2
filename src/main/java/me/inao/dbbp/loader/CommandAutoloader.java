@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import me.inao.dbbp.annotations.Autoload;
 import me.inao.dbbp.enums.AutoloadType;
-import me.inao.discordbot.interfaces.ICommand;
+import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.persistant.StorageUnit;
 import org.reflections.Reflections;
 
