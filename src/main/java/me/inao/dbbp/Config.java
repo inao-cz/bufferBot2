@@ -16,6 +16,7 @@ public class Config {
     private String apikey;
     private String status;
     private String prefix;
+    private boolean slashcommands;
 
     @SerializedName("commands")
     @Expose
@@ -24,6 +25,10 @@ public class Config {
     @SerializedName("features")
     @Expose
     JsonObject features;
+
+    @SerializedName("arguments")
+    @Expose
+    JsonObject arguments;
 
     public void loadConfig(Main instance){
         Gson gson = new Gson();
@@ -49,6 +54,16 @@ public class Config {
     public boolean isCommandEnabled(String name){
         try{
             return commands.getAsJsonObject(name).get("enabled").getAsBoolean();
+        }catch (Exception e){
+            System.out.println(name);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isArgumentEnabled(String name){
+        try{
+            return arguments.getAsJsonObject(name).get("enabled").getAsBoolean();
         }catch (Exception e){
             System.out.println(name);
             e.printStackTrace();

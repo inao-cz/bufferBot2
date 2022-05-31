@@ -10,21 +10,7 @@ import java.util.Optional;
 
 public class CommandsProcessor {
     public boolean startCommandIfAny(Message msg, Object event, StorageUnit storageUnit){
-//        CommandParser parser = new CommandParser();
-//        parser.setApi(instance.getApi());
-//        parser.setLoader(instance.getLoader());
-//        parser.setCommandPrefix(String.valueOf(instance.getConfig().getPrefix()));
-//        String[] parsed = parser.getParsedCommand(message.getContent());
-//        List<IParameter> parameterList = parser.getParsedValues(parsed);
-//
-//        String cmd = "";
-//        for(String parse : parsed){
-//            if(parser.checkForCommandPair(parse)){
-//                cmd = parse;
-//                break;
-//            }
-//        }
-        String finalCmd = msg.getContent().replace(String.valueOf(storageUnit.getConfig().getPrefix()), "");
+        String finalCmd = msg.getContent().replace(String.valueOf(storageUnit.getConfig().getPrefix()), "").split(" ")[0];
         Optional<? extends Class<? extends ICommand>> command = storageUnit.getCommandOverviewMap().entrySet()
                 .stream()
                 .filter(entry -> finalCmd.equalsIgnoreCase(entry.getKey()))

@@ -3,6 +3,7 @@ package me.inao.dbbp.persistant;
 import lombok.Getter;
 import lombok.Setter;
 import me.inao.dbbp.Config;
+import me.inao.dbbp.interfaces.IArgument;
 import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.lentil.StatefulLentilContainer;
 import me.inao.dbbp.perms.PermissionCheck;
@@ -20,5 +21,6 @@ public class StorageUnit {
     private PermissionCheck permissionCheck = new PermissionCheck(this);
     private DiscordApi api;
     private HashMap<String, StatefulLentilContainer> statefulLentilsSoup = new HashMap<>();
+    private HashMap<String[], Class<? extends IArgument>> argumentsOverviewMap = new HashMap<>();
     private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors() / 2);
 }

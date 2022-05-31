@@ -1,5 +1,5 @@
 package me.inao.dbbp.enums;
 
 public enum AutoloadType {
-    NONE, COMMAND, LISTENER, TASK
+    NONE, COMMAND, LISTENER, TASK, ARGUMENT
 }

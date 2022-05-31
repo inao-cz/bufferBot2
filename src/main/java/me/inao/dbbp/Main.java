@@ -25,6 +25,7 @@ public class Main {
         new AutoloadHandler(storageUnit).loadCommands("me.inao.discordbot.autoload.commands");
         new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.discordbot.autoload.listeners");
         new AutoloadHandler(storageUnit).loadTasks("me.inao.discordbot.autoload.tasks");
+        new AutoloadHandler(storageUnit).loadArguments("me.inao.discordbot.autoload.arguments");
 
         DiscordApi api = builder.login().join();
 

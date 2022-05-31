@@ -1,45 +1,57 @@
 package me.inao.dbbp.commands;
 
 import lombok.Setter;
+import me.inao.dbbp.interfaces.IArgument;
 import me.inao.dbbp.persistant.StorageUnit;
 import org.javacord.api.DiscordApi;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class CommandsParser {
     @Setter
     private DiscordApi api;
 
     @Setter
-    private StorageUnit loader;
-
-    @Setter
     private String commandPrefix;
 
-//    public List<Class<?>> getParsedValues(String[] parts){
-//        List<Class<?>> parameters = new ArrayList<>();
-//        if(loader.getParameterList() == null) return null;
-//        for (String part : parts){
-//            if(checkForCommandPair(part)) continue;
-//            String[] partSplit = part.split("\\s");
-//            Optional<Class<?>> parameter = loader.getParameterList().entrySet().stream().filter(listIParameterEntry -> listIParameterEntry.getKey().stream().anyMatch(entry -> entry.matches(partSplit[0]))).map(Map.Entry::getValue).findAny();
-//            if(parameter.isPresent()){
-//                String[] modifiedArray = Arrays.copyOfRange(partSplit, 1, partSplit.length);
-//                IParameter param = parameter.get();
-//                param.onParse(this.api, String.join(" ", Arrays.asList(modifiedArray)));
-//                parameters.add(param);
-//            }
-//        }
-//        return parameters;
-//    }
+    public HashMap<Class<? extends IArgument>, Object> getParsedArguments(String message, StorageUnit storageUnit) {
+        HashMap<Class<? extends IArgument>, Object> arguments = new HashMap<>();
+        if(storageUnit.getArgumentsOverviewMap().isEmpty()) return null;
+        String[] parts = getParsedCommand(message);
 
-    public String[] getParsedCommand(String message){
+        for (String part : parts){
+            if(checkForCommandPair(part)) continue;
+            String[] partSplit = part.split("\\s");
+            Optional<? extends Class<? extends IArgument>> parameter = storageUnit.getArgumentsOverviewMap().entrySet().stream()
+                    .filter(listIParameterEntry -> Arrays.stream(listIParameterEntry.getKey()).anyMatch(entry -> entry.matches(partSplit[0])))
+                    .map(Map.Entry::getValue).findAny();
+            if(parameter.isPresent()){
+                String[] modifiedArray = Arrays.copyOfRange(partSplit, 1, partSplit.length);
+                try{
+                    IArgument param = parameter.get().getDeclaredConstructor().newInstance();
+                    arguments.put(parameter.get(), param.getParsedValue(String.join(" ", Arrays.asList(modifiedArray))));
+                }catch (Exception ignored){}
+            }
+        }
+        return arguments;
+    }
+
+    public HashMap<Class<? extends IArgument>, Object> getParsedSlashCommandsArguments(){
+        return null;
+    }
+
+    private String[] getParsedCommand(String message){
         return message.split("\\s-");
     }
 
-    public boolean checkForParamPair(String splitMessage){
+    private boolean checkForParamPair(String splitMessage){
         return splitMessage.matches("^[\\-].+\\s.+$");
     }
 
-    public boolean checkForCommandPair(String splitMessage){
+    private boolean checkForCommandPair(String splitMessage){
         return splitMessage.matches("^" + commandPrefix + ".+(\\s.+)?$");
     }
 }

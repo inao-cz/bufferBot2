@@ -21,6 +21,10 @@ public class AutoloadHandler {
         new Thread(new TaskAutoloader(this.unit, mainPackage).load()).start();
     }
 
+    public void loadArguments(String mainPackage){
+        new Thread(new ArgumentsHandler(this.unit, mainPackage).load()).start();
+    }
+
     public void fixJavacordMessInListeners(DiscordApi api){
         new ListenerAutoloader(this.unit).fixJavacordMessInListeners(api);
     }

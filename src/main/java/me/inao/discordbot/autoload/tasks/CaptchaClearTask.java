@@ -8,11 +8,12 @@ import me.inao.discordbot.lentils.CaptchaLentil;
 @Task
 public class CaptchaClearTask implements IScheduledTask {
 
-    @Inject(outside = true)
+    @Inject
     private CaptchaLentil captcha;
 
     @Override
     public void run() {
+        captcha.setUsersCount(0);
         captcha.clearUsers();
     }
 }
