@@ -7,7 +7,7 @@ Well, my old bot was using older base, much older than I'd like to use. So I've 
 DBBP3 is trying to use and somehow copy ideas of CDI. This means this base is able to inject by annotation, you are able to introduce Stateful and Stateless "lentils" (read Beans if you wish)
 
 ## License and usage
-Since this project, whilst being opensource, is using a proprietary license, please contact me before using DBBP3 or any bot that's built on top of it.
+License is being covered in the LICENSE file. By using any of the code, you're agreeing to the license. If you don't agree, don't use this code. You can (and most probably will) face the consequences if you don't fulfill the license.
 
 ## Performance
 Performance is a huge concern (amongst many others). So I'm always trying to make the bot and base faster, clearer and better in general.
