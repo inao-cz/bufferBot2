@@ -18,7 +18,7 @@ public class Main {
     }
 
     public void start(){
-        new Config().loadConfig(this);
+        new Config().loadConfig(storageUnit);
         DiscordApiBuilder builder = new DiscordApiBuilder().setWaitForServersOnStartup(false).setToken(storageUnit.getConfig().getApikey());
 
         new LentilHandler(storageUnit).loadStatefulLentils("me.inao.discordbot.lentils");

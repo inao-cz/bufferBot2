@@ -23,10 +23,10 @@ public class CommandWrapper implements Runnable{
             HashMap<Class<? extends IArgument>, Object> args = null;
             if(command.getClass().isAnnotationPresent(Command.class)){
                 Command cmdAnnotation = command.getClass().getAnnotation(Command.class);
-                if(cmdAnnotation.requiredArguments() != null){
+                if(cmdAnnotation.requiredArguments() != null && cmdAnnotation.requiredArguments().length > 0){
                     if(!storageUnit.getConfig().isSlashcommands()) args = new CommandsParser().getParsedArguments(((MessageCreateEvent)event).getMessageContent(), storageUnit);
                 }
-                if(cmdAnnotation.requiredArguments() != null && (args == null || cmdAnnotation.requiredArguments().length != args.size())){
+                if(cmdAnnotation.requiredArguments() != null && cmdAnnotation.requiredArguments().length > 0 && (args == null || cmdAnnotation.requiredArguments().length != args.size())){
                     ((MessageCreateEvent)event).getChannel().sendMessage("You need to provide all required arguments!");
                     return;
                 }

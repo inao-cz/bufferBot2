@@ -83,6 +83,8 @@ public class InjectorHandler {
                             } else {
                                 logger.log(Level.ERROR, "There was a problem with injecting your stateful lentil. Most probably you've entered incorrect sequence number or your lentil doesn't exist");
                             }
+                        }else if(field.getType().equals(StorageUnit.class)){
+                            val = storageUnit;
                         }
                     } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException noSuchMethodException) {
                         logger.log(Level.ERROR, noSuchMethodException);

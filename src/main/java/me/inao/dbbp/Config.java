@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import me.inao.dbbp.persistant.StorageUnit;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,7 +31,7 @@ public class Config {
     @Expose
     JsonObject arguments;
 
-    public void loadConfig(Main instance){
+    public void loadConfig(StorageUnit storageUnit){
         Gson gson = new Gson();
         String[] files = {"config.local.json", "config.json"};
         try {
@@ -45,7 +46,7 @@ public class Config {
             if (reader == null) {
                 System.exit(-2);
             }
-            instance.getStorageUnit().setConfig(gson.fromJson(reader, Config.class));
+            storageUnit.setConfig(gson.fromJson(reader, Config.class));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
