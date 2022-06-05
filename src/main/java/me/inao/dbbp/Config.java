@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import me.inao.dbbp.persistant.StorageUnit;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +17,7 @@ public class Config {
     private String apikey;
     private String status;
     private String prefix;
+    private boolean slashcommands;
 
     @SerializedName("commands")
     @Expose
@@ -25,7 +27,11 @@ public class Config {
     @Expose
     JsonObject features;
 
-    public void loadConfig(Main instance){
+    @SerializedName("arguments")
+    @Expose
+    JsonObject arguments;
+
+    public void loadConfig(StorageUnit storageUnit){
         Gson gson = new Gson();
         String[] files = {"config.local.json", "config.json"};
         try {
@@ -40,7 +46,7 @@ public class Config {
             if (reader == null) {
                 System.exit(-2);
             }
-            instance.getStorageUnit().setConfig(gson.fromJson(reader, Config.class));
+            storageUnit.setConfig(gson.fromJson(reader, Config.class));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -49,6 +55,16 @@ public class Config {
     public boolean isCommandEnabled(String name){
         try{
             return commands.getAsJsonObject(name).get("enabled").getAsBoolean();
+        }catch (Exception e){
+            System.out.println(name);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isArgumentEnabled(String name){
+        try{
+            return arguments.getAsJsonObject(name).get("enabled").getAsBoolean();
         }catch (Exception e){
             System.out.println(name);
             e.printStackTrace();

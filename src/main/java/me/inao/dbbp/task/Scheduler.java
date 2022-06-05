@@ -6,13 +6,14 @@ import me.inao.dbbp.interfaces.IScheduledTask;
 import me.inao.dbbp.persistant.StorageUnit;
 
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 public class Scheduler {
     private StorageUnit storageUnit;
-    public void scheduleTask(Class<? extends IScheduledTask> taskClass, long time, ChronoUnit timeUnit){
-        storageUnit.getExecutorService().schedule(() -> {
+    public ScheduledFuture<?> scheduleTask(Class<? extends IScheduledTask> taskClass, long time, ChronoUnit timeUnit){
+        return storageUnit.getExecutorService().schedule(() -> {
             try{
                 IScheduledTask taskInstance = taskClass.getDeclaredConstructor().newInstance();
                 new InjectorHandler(storageUnit).injectionHandler(taskInstance, null);

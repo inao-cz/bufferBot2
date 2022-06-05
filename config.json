@@ -2,6 +2,7 @@
   "apikey": "",
   "prefix": "dbbp~",
   "status": "dnd",
+  "slashcommands": false,
   "commands": {
     "Test": {
       "enabled": true,
@@ -16,6 +17,11 @@
       "category": "admin"
     },
     "Captcha":{
+      "enabled": true
+    }
+  },
+  "arguments": {
+    "foobar":{
       "enabled": true
     }
   }
