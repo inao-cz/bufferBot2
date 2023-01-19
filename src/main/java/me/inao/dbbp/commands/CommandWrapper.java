@@ -6,8 +6,10 @@ import me.inao.dbbp.interfaces.IArgument;
 import me.inao.dbbp.interfaces.ICommand;
 import me.inao.dbbp.injectors.InjectorHandler;
 import me.inao.dbbp.persistant.StorageUnit;
+import me.inao.discordbot.lentils.MessageSenderLentil;
 import org.javacord.api.event.message.MessageCreateEvent;
 
+import java.awt.*;
 import java.util.HashMap;
 
 @RequiredArgsConstructor
@@ -27,7 +29,8 @@ public class CommandWrapper implements Runnable{
                     if(!storageUnit.getConfig().isSlashcommands()) args = new CommandsParser().getParsedArguments(((MessageCreateEvent)event).getMessageContent(), storageUnit);
                 }
                 if(cmdAnnotation.requiredArguments() != null && cmdAnnotation.requiredArguments().length > 0 && (args == null || cmdAnnotation.requiredArguments().length != args.size())){
-                    ((MessageCreateEvent)event).getChannel().sendMessage("You need to provide all required arguments!");
+//                    ((MessageCreateEvent)event).getChannel().sendMessage("You need to provide all required arguments!");
+                    new MessageSenderLentil().sendEmbedMessage("Error", "You need to provide all required arguments!", Color.RED, ((MessageCreateEvent)event).getChannel());
                     return;
                 }
             }

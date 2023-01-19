@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Argument {
-    Class<?> type();
+    Class<?>[] type();
     String name();
     String usage();
     String[] aliases();

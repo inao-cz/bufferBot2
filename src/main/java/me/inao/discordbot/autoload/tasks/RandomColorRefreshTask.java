@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Level;
 import java.util.Arrays;
 
 @Autoload(type = AutoloadType.TASK)
-@Task(time = 1, type = TaskType.REPEAT)
+@Task(time = 60, type = TaskType.REPEAT)
 public class RandomColorRefreshTask implements IScheduledTask {
 
     @Inject

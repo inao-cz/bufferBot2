@@ -6,7 +6,7 @@ import me.inao.dbbp.enums.AutoloadType;
 import me.inao.dbbp.interfaces.IArgument;
 
 @Autoload(type = AutoloadType.ARGUMENT)
-@Argument(type = Integer.class, name = "count", usage = "count", aliases = {"num", "number"})
+@Argument(type = {Integer.class, Long.class}, name = "count", usage = "count", aliases = {"num", "number"})
 public class Count implements IArgument {
 
     @Override

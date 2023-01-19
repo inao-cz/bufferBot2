@@ -1,4 +1,4 @@
-package me.inao.discordbot.autoload.listeners;
+package me.inao.dbbp.autoload.listeners;
 
 import lombok.RequiredArgsConstructor;
 import me.inao.discordbot.lentils.LoggerLentil;
@@ -8,7 +8,6 @@ import me.inao.dbbp.annotations.Inject;
 import me.inao.dbbp.commands.CommandsProcessor;
 import me.inao.dbbp.persistant.StorageUnit;
 import org.apache.logging.log4j.Level;
-import org.javacord.api.DiscordApi;
 import org.javacord.api.event.message.MessageCreateEvent;
 
 @RequiredArgsConstructor
@@ -16,9 +15,6 @@ import org.javacord.api.event.message.MessageCreateEvent;
 public class MessageCreateListener implements org.javacord.api.listener.message.MessageCreateListener {
 
     private final StorageUnit storageUnit;
-
-    @Inject
-    private DiscordApi api;
 
     @Inject
     private LoggerLentil logger;

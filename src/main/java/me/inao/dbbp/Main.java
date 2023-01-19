@@ -21,6 +21,14 @@ public class Main {
         new Config().loadConfig(storageUnit);
         DiscordApiBuilder builder = new DiscordApiBuilder().setWaitForServersOnStartup(false).setToken(storageUnit.getConfig().getApikey());
 
+        /*
+         * Listeners load required for correctly working command processing. DO NOT TOUCH
+         */
+        new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.dbbp.autoload.listeners");
+
+        /*
+         * Loading of own system. modify this to your needs.
+         */
         new LentilHandler(storageUnit).loadStatefulLentils("me.inao.discordbot.lentils");
         new AutoloadHandler(storageUnit).loadCommands("me.inao.discordbot.autoload.commands");
         new AutoloadHandler(storageUnit).loadListeners(builder, "me.inao.discordbot.autoload.listeners");

@@ -20,7 +20,7 @@ public class User implements IArgument {
         for (String val : values){
             String id = parseIdFromMention(val);
             if(id != null){
-                parsedUsers.add( id);
+                parsedUsers.add(id);
             }
         }
         return parsedUsers.toArray();
